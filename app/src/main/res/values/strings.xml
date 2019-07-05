@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GalvaTrans</string>
+    <string name="loadingMessage">Mohon tunggu</string>
 </resources>

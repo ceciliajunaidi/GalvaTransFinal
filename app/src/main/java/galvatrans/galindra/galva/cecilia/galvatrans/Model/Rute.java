@@ -1,59 +1,31 @@
 package galvatrans.galindra.galva.cecilia.galvatrans.Model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Rute {
 
     @SerializedName("id")
-    @Expose
     public String id;
     @SerializedName("no_rute")
-    @Expose
     public String noRute;
     @SerializedName("id_user")
-    @Expose
     public String idUser;
     @SerializedName("id_karyawan")
-    @Expose
     public String idKaryawan;
     @SerializedName("id_kendaraan")
-    @Expose
     public String idKendaraan;
     @SerializedName("id_tugas")
-    @Expose
     public String idTugas;
     @SerializedName("tgl_order")
-    @Expose
     public String tglOrder;
     @SerializedName("mulai")
-    @Expose
     public String mulai;
     @SerializedName("selesai")
-    @Expose
     public String selesai;
     @SerializedName("durasi")
-    @Expose
     public String durasi;
     @SerializedName("id_status")
-    @Expose
     public String idStatus;
-
-    public Rute(String id, String noRute, String idUser, String idKaryawan,
-                String idKendaraan, String idTugas, String tglOrder, String mulai,
-                String selesai, String durasi, String idStatus) {
-        this.id = id;
-        this.noRute = noRute;
-        this.idUser = idUser;
-        this.idKaryawan = idKaryawan;
-        this.idKendaraan = idKendaraan;
-        this.idTugas = idTugas;
-        this.tglOrder = tglOrder;
-        this.mulai = mulai;
-        this.selesai = selesai;
-        this.durasi = durasi;
-        this.idStatus = idStatus;
-    }
 
     public String getId() {
         return id;

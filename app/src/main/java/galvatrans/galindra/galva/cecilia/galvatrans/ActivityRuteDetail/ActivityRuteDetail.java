@@ -1,11 +1,11 @@
-package galvatrans.galindra.galva.cecilia.galvatrans.RuteDetail;
+package galvatrans.galindra.galva.cecilia.galvatrans.ActivityRuteDetail;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
-public class RuteDetail extends AppCompatActivity {
+public class ActivityRuteDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

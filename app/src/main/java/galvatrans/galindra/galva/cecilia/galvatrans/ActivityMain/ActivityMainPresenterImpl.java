@@ -1,4 +1,4 @@
-package galvatrans.galindra.galva.cecilia.galvatrans.MainActivity;
+package galvatrans.galindra.galva.cecilia.galvatrans.ActivityMain;
 
 import android.content.Context;
 
@@ -11,11 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivityPresenterImpl implements MainActivityPresenter.MainPresenter {
+public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPresenter {
     Context context;
-    MainActivityPresenter.MainView mainView;
+    ActivityMainPresenter.MainView mainView;
 
-    public MainActivityPresenterImpl(MainActivityPresenter.MainView mainView, Context context) {
+    public ActivityMainPresenterImpl(ActivityMainPresenter.MainView mainView, Context context) {
         this.context = context;
         this.mainView = mainView;
     }
