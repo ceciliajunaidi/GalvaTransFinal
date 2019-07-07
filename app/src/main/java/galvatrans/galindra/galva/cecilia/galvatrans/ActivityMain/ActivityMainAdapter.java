@@ -17,12 +17,14 @@ import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
 public class ActivityMainAdapter extends RecyclerView.Adapter<ActivityMainAdapter.ViewHolder> {
 
+    ActivityMainItemAdapterClicked listener;
     private Context context;
     private List<Rute> rute;
 
-    ActivityMainAdapter(Context context, List<Rute> rute) {
+    ActivityMainAdapter(Context context, List<Rute> rute, ActivityMainItemAdapterClicked listener) {
         this.context = context;
         this.rute = rute;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,25 +35,9 @@ public class ActivityMainAdapter extends RecyclerView.Adapter<ActivityMainAdapte
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        if (rute.get(position).getMulai().equals("")){
-            viewHolder.txtStatusOrder.setText("Belum Diantar");
-            viewHolder.txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_idle));
-        } else {
-            viewHolder.txtStatusOrder.setText("Sedang Diantar");
-            viewHolder.txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
-        }
-        viewHolder.txtNomorOrder.setText(": " + rute.get(position).getNoRute());
-        viewHolder.txtNomorMobil.setText(": " + rute.get(position).getIdKendaraan());
-        viewHolder.txtTanggalOrder.setText(": " + rute.get(position).getTglOrder());
-
-        if (rute.get(position).getMulai().equals("")) {
-            viewHolder.txtUser.setText(": -");
-        } else {
-            viewHolder.txtUser.setText(": " + rute.get(position).getMulai());
-        }
+        viewHolder.bind(rute.get(position), listener);
     }
 
     @Override
@@ -68,8 +54,32 @@ public class ActivityMainAdapter extends RecyclerView.Adapter<ActivityMainAdapte
             txtStatusOrder = itemView.findViewById(R.id.txtStatusOrder);
             txtNomorOrder = itemView.findViewById(R.id.txtNomorOrder);
             txtNomorMobil = itemView.findViewById(R.id.txtNomorMobil);
-            txtTanggalOrder = itemView.findViewById(R.id.txtTanggalOrder);
-            txtUser = itemView.findViewById(R.id.txtTanggalMulai);
+            txtTanggalOrder = itemView.findViewById(R.id.txtBerangkat);
+            txtUser = itemView.findViewById(R.id.txtSampai);
+        }
+
+        @SuppressLint("SetTextI18n")
+        void bind(Rute rute, ActivityMainItemAdapterClicked listener) {
+            if (rute.getMulai().equals("")) {
+                txtStatusOrder.setText("Belum Diantar");
+                txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_idle));
+            } else {
+                txtStatusOrder.setText("Sedang Diantar");
+                txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
+            }
+            txtNomorOrder.setText(": " + rute.getNoRute());
+            txtNomorMobil.setText(": " + rute.getIdKendaraan());
+            txtTanggalOrder.setText(": " + rute.getTglOrder());
+
+            if (rute.getMulai().equals("")) {
+                txtUser.setText(": -");
+            } else {
+                txtUser.setText(": " + rute.getMulai());
+            }
+
+            itemView.setOnClickListener(v -> {
+                listener.onItemClick(rute);
+            });
         }
     }
 }

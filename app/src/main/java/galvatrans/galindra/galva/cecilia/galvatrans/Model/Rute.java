@@ -5,34 +5,34 @@ import com.google.gson.annotations.SerializedName;
 public class Rute {
 
     @SerializedName("id")
-    public String id;
+    private String idRute;
     @SerializedName("no_rute")
-    public String noRute;
+    private String noRute;
     @SerializedName("id_user")
-    public String idUser;
+    private String idUser;
     @SerializedName("id_karyawan")
-    public String idKaryawan;
+    private String idKaryawan;
     @SerializedName("id_kendaraan")
-    public String idKendaraan;
+    private String idKendaraan;
     @SerializedName("id_tugas")
-    public String idTugas;
+    private String idTugas;
     @SerializedName("tgl_order")
-    public String tglOrder;
+    private String tglOrder;
     @SerializedName("mulai")
-    public String mulai;
+    private String mulai;
     @SerializedName("selesai")
-    public String selesai;
+    private String selesai;
     @SerializedName("durasi")
-    public String durasi;
+    private String durasi;
     @SerializedName("id_status")
-    public String idStatus;
+    private String idStatus;
 
-    public String getId() {
-        return id;
+    public String getIdRute() {
+        return idRute;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdRute(String idRute) {
+        this.idRute = idRute;
     }
 
     public String getNoRute() {

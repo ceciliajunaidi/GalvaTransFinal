@@ -1,4 +1,4 @@
-package galvatrans.galindra.galva.cecilia.galvatrans.ActivityMain;
+package galvatrans.galindra.galva.cecilia.galvatrans.ActivityListRute;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,50 +15,42 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import galvatrans.galindra.galva.cecilia.galvatrans.ActivityListRute.ActivityListRute;
-import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
+import galvatrans.galindra.galva.cecilia.galvatrans.ActivityDetailRute.ActivityDetailRute;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.RuteDetail;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
-public class ActivityMain extends AppCompatActivity implements ActivityMainPresenter.MainView {
+public class ActivityListRute extends AppCompatActivity implements ActivityListRutePresenter.MainView {
 
-    String kodeDriver = "20141464";
+    String nomorOrder;
 
-    ActivityMainPresenterImpl activityMainPresenterImpl;
-    List<Rute> ruteList = new ArrayList<>();
+    ActivityListRutePresenterImpl activityListRutePresenterImpl;
+    ActivityListRuteAdapter activityListRuteAdapter;
 
     Dialog dialogLoading;
     Dialog dialogYesNo;
-    RecyclerView rvRute;
-    TextView txtNoRute;
-    ActivityMainAdapter activityMainAdapter;
+    RecyclerView rvListRute;
     SwipeRefreshLayout swipeRefreshLayout;
+    List<RuteDetail> ruteDetails = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_rute);
 
-        activityMainPresenterImpl = new ActivityMainPresenterImpl(this, getApplicationContext());
-        initLayout();
+        activityListRutePresenterImpl = new ActivityListRutePresenterImpl(this, getApplicationContext());
+        Intent intent = getIntent();
+        nomorOrder = intent.getStringExtra("nomorOrder");
+
         createLoadingDialog();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        swipeRefreshLayout.setOnRefreshListener(this::onGetDataRute);
-        swipeRefreshLayout.post(this::onGetDataRute);
+        initLayout();
     }
 
     private void initLayout() {
-        txtNoRute = findViewById(R.id.txtNoRute);
-
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
 
-        rvRute = findViewById(R.id.rvRute);
-        rvRute.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvRute.setHasFixedSize(true);
+        rvListRute = findViewById(R.id.rvRute);
+        rvListRute.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rvListRute.setHasFixedSize(true);
     }
 
     private void createLoadingDialog() {
@@ -77,45 +68,47 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
         }
     }
 
-    private void onGetDataRute() {
-        ruteList.clear();
-        txtNoRute.setVisibility(View.GONE);
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        swipeRefreshLayout.setOnRefreshListener(this::onGetListRute);
+        swipeRefreshLayout.post(this::onGetListRute);
+    }
+
+    private void onGetListRute() {
+        ruteDetails.clear();
         dialogLoading.show();
         swipeRefreshLayout.setRefreshing(false);
 
-        if (activityMainAdapter != null) {
-            activityMainAdapter.notifyDataSetChanged();
+        if (activityListRuteAdapter != null) {
+            activityListRuteAdapter.notifyDataSetChanged();
         }
 
-        activityMainPresenterImpl.onGetDataRute(kodeDriver);
+        activityListRutePresenterImpl.onGetListRute(nomorOrder);
     }
 
     @Override
-    public void onGetDataRuteSuccess(List<Rute> ruteList) {
-        this.ruteList = ruteList;
-        activityMainAdapter = new ActivityMainAdapter(this, this.ruteList, ruteClicked -> {
-            Intent intentListRute = new Intent(this, ActivityListRute.class);
-            intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
+    public void onGetListRuteSuccess(List<RuteDetail> ruteDetails) {
+        this.ruteDetails = ruteDetails;
+        activityListRuteAdapter = new ActivityListRuteAdapter(this, this.ruteDetails, ruteDetailClicked -> {
+            Intent intentListRute = new Intent(this, ActivityDetailRute.class);
+            intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
+            intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
 
             startActivity(intentListRute);
         });
-        rvRute.setAdapter(activityMainAdapter);
-
-        if (ruteList.size() == 0) {
-            txtNoRute.setVisibility(View.VISIBLE);
-        } else {
-            txtNoRute.setVisibility(View.GONE);
-        }
+        rvListRute.setAdapter(activityListRuteAdapter);
 
         dialogLoading.dismiss();
     }
 
     @Override
-    public void onGetDataRuteFailed() {
+    public void onGetListRuteFailed() {
         dialogLoading.dismiss();
 
         showYesOrNoDialog("Gagal mengambil data",
-                "Ulagi", "Keluar", "ON_GET_LIST_RUTE_FAILED");
+                "Ulangi", "Kembali", "ON_GET_LIST_RUTE_FAILED");
     }
 
     private void showYesOrNoDialog(String message, String buttonYes, String buttonNo, String stateActive) {
@@ -135,7 +128,7 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
             dialogYesNo.dismiss();
             switch (stateActive) {
                 case "ON_GET_LIST_RUTE_FAILED":
-                    onGetDataRute();
+                    onGetListRute();
 
                     break;
             }
@@ -147,7 +140,7 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
 
             switch (stateActive) {
                 case "ON_GET_LIST_RUTE_FAILED":
-                    this.finish();
+                    super.onBackPressed();
 
                     break;
             }
@@ -160,4 +153,3 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
         }
     }
 }
-

@@ -12,10 +12,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPresenter {
-    Context context;
-    ActivityMainPresenter.MainView mainView;
 
-    public ActivityMainPresenterImpl(ActivityMainPresenter.MainView mainView, Context context) {
+    private Context context;
+    private ActivityMainPresenter.MainView mainView;
+
+    ActivityMainPresenterImpl(ActivityMainPresenter.MainView mainView, Context context) {
         this.context = context;
         this.mainView = mainView;
     }
@@ -24,7 +25,7 @@ public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPres
     public void onGetDataRute(String kodeDriver) {
         ApiInterface apiInterface;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Rute>> getDataRute = apiInterface.getDataRuteByKodeDriver("GGMCCMGIN",
+        Call<List<Rute>> getDataRute = apiInterface.getRuteByKodeDriver("GGMCCMGIN",
                 "select * from rute where id_karyawan='" + kodeDriver + "'");
         getDataRute.enqueue(new Callback<List<Rute>>() {
             @SuppressWarnings("NullableProblems")

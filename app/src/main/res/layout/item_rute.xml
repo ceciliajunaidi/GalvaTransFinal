@@ -116,7 +116,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/txtTanggalOrder"
+                            android:id="@+id/txtBerangkat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="2dp"
@@ -127,7 +127,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/txtTanggalMulai"
+                            android:id="@+id/txtSampai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="2dp"
