@@ -11,6 +11,8 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
+
+
     @POST("getglobal.ashx")
     @FormUrlEncoded
     Call<List<Rute>> getRuteByKodeDriver(@Field("db") String dbName,
@@ -24,6 +26,12 @@ public interface ApiInterface {
     @POST("getglobal.ashx")
     @FormUrlEncoded
     Call<List<RuteDetail>> getRuteDetailByNomorOrderAndNomorRute(@Field("db") String dbName,
-                                                          @Field("sql") String querry);
+                                                                 @Field("sql") String querry);
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<RuteDetail>> getUpdateBerangkat(@Field("db") String dbName,
+                                              @Field("sql") String querry);
+
 
 }

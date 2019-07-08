@@ -41,4 +41,25 @@ public class ActivityDetailRutePresenterImpl implements ActivityDetailRutePresen
             }
         });
     }
+
+    @Override
+    public void updateWaktuBerangkat(String nomorOrder, String nomorRute) {
+        ApiInterface apiInterface;
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<RuteDetail>> getDataRuteDetail = apiInterface.getUpdateBerangkat("GGMCCMGIN",
+                "UPDATE rute_det set berangkat='asd' where id_rute='" + nomorOrder + "'" + "and rute='" + nomorRute + "'");
+        getDataRuteDetail.enqueue(new Callback<List<RuteDetail>>() {
+            @SuppressWarnings("NullableProblems")
+            @Override
+            public void onResponse(Call<List<RuteDetail>> call, Response<List<RuteDetail>> response) {
+                mainView.updateWaktuBerangkatSuccess();
+            }
+
+            @SuppressWarnings("NullableProblems")
+            @Override
+            public void onFailure(Call<List<RuteDetail>> call, Throwable t) {
+
+            }
+        });
+    }
 }

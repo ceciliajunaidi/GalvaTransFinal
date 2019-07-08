@@ -22,11 +22,11 @@ public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPres
     }
 
     @Override
-    public void onGetDataRute(String kodeDriver) {
+    public void onGetDataRute(String username) {
         ApiInterface apiInterface;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Rute>> getDataRute = apiInterface.getRuteByKodeDriver("GGMCCMGIN",
-                "select * from rute where id_karyawan='" + kodeDriver + "'");
+                "select * from rute where email='" + username + "'");
         getDataRute.enqueue(new Callback<List<Rute>>() {
             @SuppressWarnings("NullableProblems")
             @Override

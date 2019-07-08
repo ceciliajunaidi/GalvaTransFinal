@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.telecom.Call;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.RuteDetail;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
+import galvatrans.galindra.galva.cecilia.galvatrans.Retrofit.ApiClient;
+import galvatrans.galindra.galva.cecilia.galvatrans.Retrofit.ApiInterface;
 
 public class ActivityDetailRute extends AppCompatActivity implements ActivityDetailRutePresenter.MainView {
 
@@ -25,6 +29,8 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
     String stateActive;
     TextView txtNomorOrder, txtTujuan, txtWaktuSampai, txtWaktuBerangkat, txtNoteAdmin;
     MaterialButton btnAddBiayaTambahan, btnUploadImage, btnBatal, btnProses;
+
+    RuteDetail ruteDetail;
 
     ActivityDetailRutePresenterImpl activityDetailRutePresenterImpl;
 
@@ -85,11 +91,15 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
         btnProses.setOnClickListener(v -> {
             switch (stateActive) {
                 case "BERANGKAT":
+                    updateWaktuBerangkatSuccess();
+
                     Toast.makeText(this, stateActive, Toast.LENGTH_SHORT).show();
 
                     break;
 
                 case "SAMPAI":
+
+
                     Toast.makeText(this, stateActive, Toast.LENGTH_SHORT).show();
 
                     break;
@@ -119,7 +129,7 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
             stateActive = "BERANGKAT";
             btnProses.setText("ANTAR");
             btnProses.setEnabled(true);
-        } else if (!ruteDetail.getBerangkat().equals("") && ruteDetail.getSampai().equals("")) {
+        } else if (ruteDetail.getBerangkat().equals(ruteDetail.getBerangkat()) && ruteDetail.getSampai().equals("")) {
             stateActive = "SAMPAI";
             btnProses.setText("SELESAI");
             btnProses.setEnabled(true);
@@ -181,4 +191,10 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
                     (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
     }
+
+    @Override
+    public void updateWaktuBerangkatSuccess() {
+        activityDetailRutePresenterImpl.updateWaktuBerangkat(nomorOrder, nomorRute);
+    }
+
 }

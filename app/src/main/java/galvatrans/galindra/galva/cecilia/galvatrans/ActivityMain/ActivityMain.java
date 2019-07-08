@@ -22,7 +22,8 @@ import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
 public class ActivityMain extends AppCompatActivity implements ActivityMainPresenter.MainView {
 
-    String kodeDriver = "20141464";
+//    String username = "20141464";
+    String username;
 
     ActivityMainPresenterImpl activityMainPresenterImpl;
     List<Rute> ruteList = new ArrayList<>();
@@ -87,7 +88,7 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
             activityMainAdapter.notifyDataSetChanged();
         }
 
-        activityMainPresenterImpl.onGetDataRute(kodeDriver);
+        activityMainPresenterImpl.onGetDataRute(username);
     }
 
     @Override

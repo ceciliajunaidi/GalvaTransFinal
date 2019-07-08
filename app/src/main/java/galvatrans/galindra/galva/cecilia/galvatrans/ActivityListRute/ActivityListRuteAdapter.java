@@ -63,7 +63,7 @@ public class ActivityListRuteAdapter extends RecyclerView.Adapter<ActivityListRu
             if (listRute.getBerangkat().equals("") && listRute.getSampai().equals("")) {
                 txtStatusOrder.setText("Menunggu Konfirmasi");
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_idle));
-            } else if (!listRute.getBerangkat().equals("") && listRute.getSampai().equals("")){
+            } else if (listRute.getBerangkat().equals(listRute.getBerangkat()) && listRute.getSampai().equals("")){
                 txtStatusOrder.setText("Dalam Proses");
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
             } else {

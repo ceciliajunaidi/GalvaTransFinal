@@ -8,11 +8,17 @@ public interface ActivityDetailRutePresenter {
 
     interface MainPresenter {
         void onGetDetailRute(String nomorOrder, String nomorRute);
+
+        void updateWaktuBerangkat(String nomorOrder, String nomorRute);
     }
 
     interface MainView {
         void onGetDetailRuteSuccess(List<RuteDetail> ruteDetails);
 
         void onGetDetailRuteFailed();
+
+        void updateWaktuBerangkatSuccess();
+
+
     }
 }
