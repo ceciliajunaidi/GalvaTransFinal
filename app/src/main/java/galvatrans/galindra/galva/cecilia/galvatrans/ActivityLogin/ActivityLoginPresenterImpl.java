@@ -45,7 +45,7 @@ public class ActivityLoginPresenterImpl implements ActivityLoginPresenter.MainPr
     @Override
     public void onCreateSession(List<Driver> driver) {
         SessionManager sessionManager = new SessionManager(context);
-        sessionManager.createLoginSession(driver.get(0).getNamaDriver());
+        sessionManager.createLoginSession(driver.get(0).getIdDriver());
 
         mainView.onCreateSessionSuccess();
     }

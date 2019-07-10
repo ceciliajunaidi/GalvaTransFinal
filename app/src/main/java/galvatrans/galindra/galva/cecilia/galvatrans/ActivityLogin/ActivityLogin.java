@@ -1,6 +1,7 @@
 package galvatrans.galindra.galva.cecilia.galvatrans.ActivityLogin;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import galvatrans.galindra.galva.cecilia.galvatrans.ActivityMain.ActivityMain;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Driver;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
 import retrofit2.Response;
@@ -82,6 +84,10 @@ public class ActivityLogin extends AppCompatActivity implements ActivityLoginPre
             try {
                 if (!driver.get(0).getNamaDriver().equals("")) {
                     activityLoginPresenterImpl.onCreateSession(driver);
+                    Intent intent = new Intent(getApplicationContext(), ActivityMain.class);
+                    startActivity(intent);
+
+                    this.finish();
                 }
             } catch (Exception e) {
                 txtError.setText("Password atau username salah");

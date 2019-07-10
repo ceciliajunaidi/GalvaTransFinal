@@ -60,12 +60,13 @@ public class ActivityMainAdapter extends RecyclerView.Adapter<ActivityMainAdapte
 
         @SuppressLint("SetTextI18n")
         void bind(Rute rute, ActivityMainItemAdapterClicked listener) {
-            if (rute.getMulai().equals("")) {
-                txtStatusOrder.setText("Belum Diantar");
+            txtStatusOrder.setText(rute.getStatus());
+            if (rute.getStatus().equals("Belum Diantar")) {
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_idle));
-            } else {
-                txtStatusOrder.setText("Sedang Diantar");
+            } else if (rute.getStatus().equals("Sedang Diantar")){
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
+            } else {
+                txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_finish));
             }
             txtNomorOrder.setText(": " + rute.getNoRute());
             txtNomorMobil.setText(": " + rute.getIdKendaraan());

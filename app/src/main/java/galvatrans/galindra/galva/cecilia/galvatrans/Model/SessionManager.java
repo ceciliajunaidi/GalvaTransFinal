@@ -32,7 +32,7 @@ public class SessionManager {
         editor.commit();
     }
 
-    public HashMap<String, String> getUserDetails(){
+    public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<>();
         user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, null));
 

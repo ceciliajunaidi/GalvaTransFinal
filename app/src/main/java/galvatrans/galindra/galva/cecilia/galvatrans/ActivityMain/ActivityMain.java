@@ -12,17 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.ActivityListRute.ActivityListRute;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.SessionManager;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
 public class ActivityMain extends AppCompatActivity implements ActivityMainPresenter.MainView {
 
-    String username = "yadi.sbdg";
+    String username;
 
     ActivityMainPresenterImpl activityMainPresenterImpl;
     List<Rute> ruteList = new ArrayList<>();
@@ -34,12 +37,20 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
     ActivityMainAdapter activityMainAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
 
+    SessionManager sessionManager;
+    HashMap<String, String> sessionUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         activityMainPresenterImpl = new ActivityMainPresenterImpl(this, getApplicationContext());
+
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionUser = sessionManager.getUserDetails();
+        username = sessionUser.get(SessionManager.KEY_USERNAME);
+
         initLayout();
         createLoadingDialog();
     }
@@ -60,6 +71,33 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
         rvRute = findViewById(R.id.rvRute);
         rvRute.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvRute.setHasFixedSize(true);
+        activityMainAdapter = new ActivityMainAdapter(this, this.ruteList, ruteClicked -> {
+            if (ruteClicked.getStatus().equals("Belum Diantar")){
+                int onProgressActive = 0;
+                for (Rute rute : ruteList){
+                    if (rute.getStatus().equals("Sedang Diantar")){
+                        onProgressActive = onProgressActive + 1;
+
+                    }
+                }
+
+                if (onProgressActive > 0) {
+                    Toast.makeText(this, "Selesaikan order berlangsung", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intentListRute = new Intent(this, ActivityListRute.class);
+                    intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
+
+                    startActivity(intentListRute);
+
+                }
+            } else {
+                Intent intentListRute = new Intent(this, ActivityListRute.class);
+                intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
+
+                startActivity(intentListRute);
+            }
+        });
+        rvRute.setAdapter(activityMainAdapter);
     }
 
     private void createLoadingDialog() {
@@ -92,19 +130,22 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
 
     @Override
     public void onGetDataRuteSuccess(List<Rute> ruteList) {
-        this.ruteList = ruteList;
-        activityMainAdapter = new ActivityMainAdapter(this, this.ruteList, ruteClicked -> {
-            Intent intentListRute = new Intent(this, ActivityListRute.class);
-            intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
-
-            startActivity(intentListRute);
-        });
-        rvRute.setAdapter(activityMainAdapter);
-
         if (ruteList.size() == 0) {
             txtNoRute.setVisibility(View.VISIBLE);
         } else {
             txtNoRute.setVisibility(View.GONE);
+
+            for (Rute rute : ruteList){
+                if (rute.getMulai().equals("") && rute.getSelesai().equals("")){
+                    rute.setStatus("Belum Diantar");
+                } else if (!rute.getMulai().equals("") && rute.getSelesai().equals("")){
+                    rute.setStatus("Sedang Diantar");
+                } else {
+                    rute.setStatus("Selesai");
+                }
+                this.ruteList.add(rute);
+            }
+            activityMainAdapter.notifyDataSetChanged();
         }
 
         dialogLoading.dismiss();

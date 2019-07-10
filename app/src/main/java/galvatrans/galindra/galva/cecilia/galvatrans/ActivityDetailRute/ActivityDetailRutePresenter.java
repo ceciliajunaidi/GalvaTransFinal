@@ -10,14 +10,18 @@ public interface ActivityDetailRutePresenter {
         void onGetDetailRute(String nomorOrder, String nomorRute);
 
         void updateWaktuBerangkat(String nomorOrder, String nomorRute);
+
+        void updateWaktuSampai(String nomorOrder, String nomorRute);
     }
 
     interface MainView {
-        void onGetDetailRuteSuccess(List<RuteDetail> ruteDetails);
+        void onGetDetailRuteSuccess(RuteDetail ruteDetail);
 
         void onGetDetailRuteFailed();
 
         void updateWaktuBerangkatSuccess();
+
+        void updateWaktuSampaiSuccess();
 
 
     }

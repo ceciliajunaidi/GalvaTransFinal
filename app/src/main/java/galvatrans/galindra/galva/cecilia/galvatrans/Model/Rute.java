@@ -27,6 +27,16 @@ public class Rute {
     @SerializedName("id_status")
     private String idStatus;
 
+    String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getIdRute() {
         return idRute;
     }

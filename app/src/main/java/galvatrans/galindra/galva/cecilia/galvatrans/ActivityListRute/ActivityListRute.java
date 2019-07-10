@@ -11,11 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.ActivityDetailRute.ActivityDetailRute;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.RuteDetail;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
@@ -51,6 +53,35 @@ public class ActivityListRute extends AppCompatActivity implements ActivityListR
         rvListRute = findViewById(R.id.rvRute);
         rvListRute.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvListRute.setHasFixedSize(true);
+        activityListRuteAdapter = new ActivityListRuteAdapter(this, this.ruteDetails, ruteDetailClicked -> {
+            if (ruteDetailClicked.getStatus().equals("Belum Diantar")){
+                int onProgressActive = 0;
+                for (RuteDetail rute : ruteDetails){
+                    if (rute.getStatus().equals("Sedang Diantar")){
+                        onProgressActive = onProgressActive + 1;
+                    }
+                }
+
+                if (onProgressActive > 0) {
+                    Toast.makeText(this, "Selesaikan order berlangsung", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intentListRute = new Intent(this, ActivityDetailRute.class);
+                    intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
+                    intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
+
+                    startActivity(intentListRute);
+                }
+            } else {
+                Intent intentListRute = new Intent(this, ActivityDetailRute.class);
+                intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
+                intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
+
+                startActivity(intentListRute);
+            }
+
+
+        });
+        rvListRute.setAdapter(activityListRuteAdapter);
     }
 
     private void createLoadingDialog() {
@@ -90,15 +121,17 @@ public class ActivityListRute extends AppCompatActivity implements ActivityListR
 
     @Override
     public void onGetListRuteSuccess(List<RuteDetail> ruteDetails) {
-        this.ruteDetails = ruteDetails;
-        activityListRuteAdapter = new ActivityListRuteAdapter(this, this.ruteDetails, ruteDetailClicked -> {
-            Intent intentListRute = new Intent(this, ActivityDetailRute.class);
-            intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
-            intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
-
-            startActivity(intentListRute);
-        });
-        rvListRute.setAdapter(activityListRuteAdapter);
+        for (RuteDetail detail : ruteDetails){
+            if (detail.getBerangkat().equals("") && detail.getSampai().equals("")){
+                detail.setStatus("Belum Diantar");
+            } else if (!detail.getBerangkat().equals("") && detail.getSampai().equals("")){
+                detail.setStatus("Sedang Diantar");
+            } else {
+                detail.setStatus("Selesai");
+            }
+            this.ruteDetails.add(detail);
+        }
+        activityListRuteAdapter.notifyDataSetChanged();
 
         dialogLoading.dismiss();
     }

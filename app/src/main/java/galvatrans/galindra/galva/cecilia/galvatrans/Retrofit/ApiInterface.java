@@ -41,9 +41,12 @@ public interface ApiInterface {
                                               @Field("no_rute") String no_rute,
                                               @Field("mulai") String mulai);
 
-    @POST("getglobal.ashx")
+    @POST("update.ashx")
     @FormUrlEncoded
-    Call<List<RuteDetail>> getUpdateSampai(@Field("db") String dbName,
-                                           @Field("sql") String querry);
+    Call<List<RuteDetail>> getUpdateSampai(@Field("tipe") String tipe,
+                                           @Field("pt") String pt,
+                                           @Field("id_rute") String id_rute,
+                                           @Field("no_rute") String no_rute,
+                                           @Field("sampai") String sampai);
 
 }

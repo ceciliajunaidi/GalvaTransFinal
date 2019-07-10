@@ -60,15 +60,13 @@ public class ActivityListRuteAdapter extends RecyclerView.Adapter<ActivityListRu
 
         @SuppressLint("SetTextI18n")
         void bind(RuteDetail listRute, ActivityListRuteItemAdapterClicked listener) {
-            if (listRute.getBerangkat().equals("") && listRute.getSampai().equals("")) {
-                txtStatusOrder.setText("Menunggu Konfirmasi");
+            txtStatusOrder.setText(listRute.getStatus());
+            if (listRute.getStatus().equals("Belum Diantar")) {
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_idle));
-            } else if (listRute.getBerangkat().equals(listRute.getBerangkat()) && listRute.getSampai().equals("")){
-                txtStatusOrder.setText("Dalam Proses");
+            } else if (listRute.getStatus().equals("Sedang Diantar")){
                 txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
             } else {
-                txtStatusOrder.setText("Proses Selesai");
-                txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_onprogress));
+                txtStatusOrder.setBackground(ContextCompat.getDrawable(context, R.drawable.background_finish));
             }
             txtNomorOrder.setText(": " + listRute.getIdRute());
             txtTujuan.setText(": " + listRute.getTujuan());

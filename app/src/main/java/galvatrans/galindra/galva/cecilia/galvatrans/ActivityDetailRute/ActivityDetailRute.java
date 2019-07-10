@@ -7,6 +7,7 @@ import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.telecom.Call;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
     TextView txtNomorOrder, txtTujuan, txtWaktuSampai, txtWaktuBerangkat, txtNoteAdmin;
     MaterialButton btnAddBiayaTambahan, btnUploadImage, btnBatal, btnProses;
 
+    RuteDetail ruteDetail;
+
     ActivityDetailRutePresenterImpl activityDetailRutePresenterImpl;
 
     @Override
@@ -47,6 +50,8 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
         initLayout();
         onGetDetailRute();
     }
+
+
 
     private void createLoadingDialog() {
         dialogLoading = new Dialog(this);
@@ -87,20 +92,31 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
 
         btnProses = findViewById(R.id.btnProses);
         btnProses.setOnClickListener(v -> {
+            stateActive = ruteDetail.getStatus();
+
             switch (stateActive) {
-                case "BERANGKAT":
-                    updateWaktuBerangkatSuccess();
-                    Toast.makeText(this, stateActive, Toast.LENGTH_SHORT).show();
+                case "Belum Diantar":
+                    onUpdateWaktuBerangkat();
 
                     break;
-                case "SAMPAI":
+                case "Sedang Diantar":
+                    onUpdateWaktuSampai();
 
-
-                    Toast.makeText(this, stateActive, Toast.LENGTH_SHORT).show();
+                    break;
+                case "Selesai":
+                    super.onBackPressed();
 
                     break;
             }
         });
+    }
+
+    private void onUpdateWaktuBerangkat() {
+        activityDetailRutePresenterImpl.updateWaktuBerangkat(ruteDetail.getIdRute(), ruteDetail.getRute());
+    }
+
+    private void onUpdateWaktuSampai() {
+        activityDetailRutePresenterImpl.updateWaktuSampai(ruteDetail.getIdRute(), ruteDetail.getRute());
     }
 
     private void onGetDetailRute() {
@@ -110,8 +126,17 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
     }
 
     @Override
-    public void onGetDetailRuteSuccess(List<RuteDetail> ruteDetails) {
-        setToLayout(ruteDetails.get(0));
+    public void onGetDetailRuteSuccess(RuteDetail ruteDetail) {
+        this.ruteDetail = ruteDetail;
+        if (ruteDetail.getBerangkat().equals("") && ruteDetail.getSampai().equals("")){
+            this.ruteDetail.setStatus("Belum Diantar");
+        } else if (!ruteDetail.getBerangkat().equals("") && ruteDetail.getSampai().equals("")){
+            this.ruteDetail.setStatus("Sedang Diantar");
+        } else {
+            this.ruteDetail.setStatus("Selesai");
+        }
+
+        setToLayout(this.ruteDetail);
     }
 
     private void setToLayout(RuteDetail ruteDetail) {
@@ -121,18 +146,24 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
         txtWaktuSampai.setText(ruteDetail.getSampai());
         txtNoteAdmin.setText(ruteDetail.getNoteAdmin());
 
-        if (ruteDetail.getBerangkat().equals("") && ruteDetail.getSampai().equals("")) {
-            stateActive = "BERANGKAT";
+        if (ruteDetail.getStatus().equals("Belum Diantar")) {
+            btnAddBiayaTambahan.setVisibility(View.GONE);
+            btnBatal.setVisibility(View.GONE);
+            btnUploadImage.setVisibility(View.GONE);
+            btnProses.setVisibility(View.VISIBLE);
             btnProses.setText("ANTAR");
-            btnProses.setEnabled(true);
-        } else if (ruteDetail.getBerangkat().equals(ruteDetail.getBerangkat()) && ruteDetail.getSampai().equals("")) {
-            stateActive = "SAMPAI";
+        } else if (ruteDetail.getStatus().equals("Sedang Diantar")) {
+            btnAddBiayaTambahan.setVisibility(View.VISIBLE);
+            btnBatal.setVisibility(View.VISIBLE);
+            btnUploadImage.setVisibility(View.VISIBLE);
+            btnProses.setVisibility(View.VISIBLE);
             btnProses.setText("SELESAI");
-            btnProses.setEnabled(true);
         } else {
-            stateActive = "SELESAI";
-            btnProses.setText("SELESAI");
-            btnProses.setEnabled(false);
+            btnAddBiayaTambahan.setVisibility(View.GONE);
+            btnBatal.setVisibility(View.GONE);
+            btnUploadImage.setVisibility(View.GONE);
+            btnProses.setVisibility(View.VISIBLE);
+            btnProses.setText("KEMBALI");
         }
 
         dialogLoading.dismiss();
@@ -190,7 +221,15 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
 
     @Override
     public void updateWaktuBerangkatSuccess() {
-        activityDetailRutePresenterImpl.updateWaktuBerangkat(nomorOrder, nomorRute);
+        Toast.makeText(getApplicationContext(),  "Sukses", Toast.LENGTH_SHORT).show();
+
+        onGetDetailRute();
     }
 
+    @Override
+    public void updateWaktuSampaiSuccess() {
+        Toast.makeText(getApplicationContext(),  "Sukses", Toast.LENGTH_SHORT).show();
+
+        onGetDetailRute();
+    }
 }
