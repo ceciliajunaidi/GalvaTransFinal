@@ -30,8 +30,6 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
     TextView txtNomorOrder, txtTujuan, txtWaktuSampai, txtWaktuBerangkat, txtNoteAdmin;
     MaterialButton btnAddBiayaTambahan, btnUploadImage, btnBatal, btnProses;
 
-    RuteDetail ruteDetail;
-
     ActivityDetailRutePresenterImpl activityDetailRutePresenterImpl;
 
     @Override
@@ -92,11 +90,9 @@ public class ActivityDetailRute extends AppCompatActivity implements ActivityDet
             switch (stateActive) {
                 case "BERANGKAT":
                     updateWaktuBerangkatSuccess();
-
                     Toast.makeText(this, stateActive, Toast.LENGTH_SHORT).show();
 
                     break;
-
                 case "SAMPAI":
 
 

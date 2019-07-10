@@ -22,8 +22,7 @@ import galvatrans.galindra.galva.cecilia.galvatrans.R;
 
 public class ActivityMain extends AppCompatActivity implements ActivityMainPresenter.MainView {
 
-//    String username = "20141464";
-    String username;
+    String username = "yadi.sbdg";
 
     ActivityMainPresenterImpl activityMainPresenterImpl;
     List<Rute> ruteList = new ArrayList<>();

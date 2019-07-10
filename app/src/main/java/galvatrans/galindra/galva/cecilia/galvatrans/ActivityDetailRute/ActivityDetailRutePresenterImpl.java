@@ -1,6 +1,7 @@
 package galvatrans.galindra.galva.cecilia.galvatrans.ActivityDetailRute;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -46,8 +47,7 @@ public class ActivityDetailRutePresenterImpl implements ActivityDetailRutePresen
     public void updateWaktuBerangkat(String nomorOrder, String nomorRute) {
         ApiInterface apiInterface;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<RuteDetail>> getDataRuteDetail = apiInterface.getUpdateBerangkat("GGMCCMGIN",
-                "UPDATE rute_det set berangkat='asd' where id_rute='" + nomorOrder + "'" + "and rute='" + nomorRute + "'");
+        Call<List<RuteDetail>> getDataRuteDetail = apiInterface.getUpdateBerangkat("awalrute", "ggmccmg", nomorOrder, nomorRute, "");
         getDataRuteDetail.enqueue(new Callback<List<RuteDetail>>() {
             @SuppressWarnings("NullableProblems")
             @Override
@@ -58,7 +58,7 @@ public class ActivityDetailRutePresenterImpl implements ActivityDetailRutePresen
             @SuppressWarnings("NullableProblems")
             @Override
             public void onFailure(Call<List<RuteDetail>> call, Throwable t) {
-
+                Toast.makeText(context, "Gagal update", Toast.LENGTH_SHORT).show();
             }
         });
     }
