@@ -24,6 +24,15 @@
 
         </activity>
         <activity android:name=".ActivityListRute.ActivityListRute" />
+
+        <activity
+            android:name=".ActivityBiaya.ActivityShowBiaya.ActivityShowBiaya"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ActivityBiaya.ActivityAddBiaya.ActivityAddBiaya"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

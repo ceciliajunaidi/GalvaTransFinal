@@ -3,6 +3,9 @@ package galvatrans.galindra.galva.cecilia.galvatrans.ActivityLogin;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Driver;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterBiaya;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterMobil;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterSatuan;
 import retrofit2.Response;
 
 public interface ActivityLoginPresenter {
@@ -14,6 +17,12 @@ public interface ActivityLoginPresenter {
 
         void onLoginFailedAndQuit();
 
+        void getMasterBiaya(String dbMaster);
+
+        void getMasterSatuan(String dbMaster);
+
+        void getMasterMobil(String dbMaster);
+
     }
 
     interface MainView{
@@ -24,6 +33,18 @@ public interface ActivityLoginPresenter {
         void onCreateSessionSuccess();
 
         void onFailedLoginAndQuitSuccess();
+
+        void onGetMasterBiayaSuccess(List<MasterBiaya> body);
+
+        void onGetMasterBiayaFailed();
+
+        void onGetMasterSatuanSuccess(List<MasterSatuan> body);
+
+        void onGetMasterSatuanFailed();
+
+        void onGetMasterMobilSuccess(List<MasterMobil> body);
+
+        void onGetMasterMobilFailed();
 
     }
 }

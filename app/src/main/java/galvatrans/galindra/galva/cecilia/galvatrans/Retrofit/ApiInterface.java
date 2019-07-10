@@ -3,6 +3,10 @@ package galvatrans.galindra.galva.cecilia.galvatrans.Retrofit;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Driver;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterBiaya;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterMobil;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.MasterSatuan;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.ResponseUpdate;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.RuteDetail;
 import retrofit2.Call;
@@ -48,5 +52,32 @@ public interface ApiInterface {
                                            @Field("id_rute") String id_rute,
                                            @Field("no_rute") String no_rute,
                                            @Field("sampai") String sampai);
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<MasterSatuan>> getMasterSatuan(@Field("db") String dbName,
+                                             @Field("sql") String querry);
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<MasterBiaya>> getMasterBiaya(@Field("db") String dbName,
+                                           @Field("sql") String querry);
+
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<MasterMobil>> getMasterMobil(@Field("db") String dbName,
+                                           @Field("sql") String querry);
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> getTotalIdExist(@Field("db") String dbName,
+                                               @Field("sql") String querry);
+
+    @POST("getglobal.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> getKm(@Field("db") String dbName,
+                                     @Field("sql") String querry);
+
 
 }
