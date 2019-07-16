@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnFirstAction"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Ambil Gambar"
+        android:textAppearance="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textSize="14sp" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnSecondAction"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Lihat Gambar Terupload"
+        android:textAppearance="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textSize="14sp" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnCancelAction"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Batal"
+        android:textAppearance="@style/Widget.MaterialComponents.Button.TextButton"
+        android:textSize="14sp" />
+
+</LinearLayout>

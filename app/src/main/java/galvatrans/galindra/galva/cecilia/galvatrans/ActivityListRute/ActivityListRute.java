@@ -24,6 +24,8 @@ import galvatrans.galindra.galva.cecilia.galvatrans.R;
 public class ActivityListRute extends AppCompatActivity implements ActivityListRutePresenter.MainView {
 
     String nomorOrder;
+    String kodeMobil;
+    String kodeSopir;
 
     ActivityListRutePresenterImpl activityListRutePresenterImpl;
     ActivityListRuteAdapter activityListRuteAdapter;
@@ -42,6 +44,8 @@ public class ActivityListRute extends AppCompatActivity implements ActivityListR
         activityListRutePresenterImpl = new ActivityListRutePresenterImpl(this, getApplicationContext());
         Intent intent = getIntent();
         nomorOrder = intent.getStringExtra("nomorOrder");
+        kodeMobil = intent.getStringExtra("kodeMobil");
+        kodeSopir = intent.getStringExtra("kodeSopir");
 
         createLoadingDialog();
         initLayout();
@@ -65,22 +69,29 @@ public class ActivityListRute extends AppCompatActivity implements ActivityListR
                 if (onProgressActive > 0) {
                     Toast.makeText(this, "Selesaikan order berlangsung", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intentListRute = new Intent(this, ActivityDetailRute.class);
-                    intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
-                    intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
+                    if (ruteDetailClicked.getRute().equals("100") && ruteDetails.size() > 1){
+                        Toast.makeText(this, "Order belum selesai", Toast.LENGTH_LONG).show();
+                    } else {
+                        Intent intentListRute = new Intent(this, ActivityDetailRute.class);
+                        intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
+                        intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
+                        intentListRute.putExtra("kodeMobil", kodeMobil);
+                        intentListRute.putExtra("kodeSopir", kodeSopir);
 
-                    startActivity(intentListRute);
+                        startActivity(intentListRute);
+                    }
                 }
             } else {
                 Intent intentListRute = new Intent(this, ActivityDetailRute.class);
                 intentListRute.putExtra("nomorRute", ruteDetailClicked.getRute());
                 intentListRute.putExtra("nomorOrder", ruteDetailClicked.getIdRute());
+                intentListRute.putExtra("kodeMobil", kodeMobil);
+                intentListRute.putExtra("kodeSopir", kodeSopir);
 
                 startActivity(intentListRute);
             }
-
-
         });
+
         rvListRute.setAdapter(activityListRuteAdapter);
     }
 

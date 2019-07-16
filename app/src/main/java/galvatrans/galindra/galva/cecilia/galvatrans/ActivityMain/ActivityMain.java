@@ -86,13 +86,16 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
                 } else {
                     Intent intentListRute = new Intent(this, ActivityListRute.class);
                     intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
+                    intentListRute.putExtra("kodeMobil", ruteClicked.getIdKendaraan());
+                    intentListRute.putExtra("kodeSopir", ruteClicked.getIdKaryawan());
 
                     startActivity(intentListRute);
-
                 }
             } else {
                 Intent intentListRute = new Intent(this, ActivityListRute.class);
                 intentListRute.putExtra("nomorOrder", ruteClicked.getNoRute());
+                intentListRute.putExtra("kodeMobil", ruteClicked.getIdKendaraan());
+                intentListRute.putExtra("kodeSopir", ruteClicked.getIdKaryawan());
 
                 startActivity(intentListRute);
             }

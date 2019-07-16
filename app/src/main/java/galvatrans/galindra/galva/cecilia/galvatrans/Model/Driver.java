@@ -12,6 +12,9 @@ public class Driver {
     @SerializedName("nama")
     private String namaDriver;
 
+    @SerializedName("kode_area")
+    private String area;
+
     public String getResponse() {
         return response;
     }
@@ -34,5 +37,13 @@ public class Driver {
 
     public void setNamaDriver(String namaDriver) {
         this.namaDriver = namaDriver;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

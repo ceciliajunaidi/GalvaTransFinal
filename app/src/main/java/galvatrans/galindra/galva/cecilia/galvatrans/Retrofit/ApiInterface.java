@@ -51,7 +51,15 @@ public interface ApiInterface {
                                            @Field("pt") String pt,
                                            @Field("id_rute") String id_rute,
                                            @Field("no_rute") String no_rute,
-                                           @Field("sampai") String sampai);
+                                           @Field("sampai") String sampai,
+                                           @Field("notesopir") String note);
+
+    @POST("update.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> updateStatusRute(@Field("tipe") String tipe,
+                                                @Field("pt") String pt,
+                                                @Field("id_rute") String idRute,
+                                                @Field("id_status") String idStatus);
 
     @POST("getglobal.ashx")
     @FormUrlEncoded
@@ -79,5 +87,37 @@ public interface ApiInterface {
     Call<List<ResponseUpdate>> getKm(@Field("db") String dbName,
                                      @Field("sql") String querry);
 
+    @POST("upload.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> uploadFoto(@Field("doku") String doku,
+                                          @Field("id") String id,
+                                          @Field("filetype") String filetype,
+                                          @Field("image") String image);
 
-}
+    @POST("postbiaya.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> postBiaya(@Field("pt") String pt,
+                                         @Field("no_bukti") String noBukti,
+                                         @Field("no_kendaraan") String noKendaraan,
+                                         @Field("kode_sopir") String kodeSopir,
+                                         @Field("total_harga") String totalHarga,
+                                         @Field("kode_area") String kodeArea,
+                                         @Field("kode_dept") String kodeDept,
+                                         @Field("tanggal") String tanggal);
+
+    @POST("postsubbiaya.ashx")
+    @FormUrlEncoded
+    Call<List<ResponseUpdate>> postSubBiaya(@Field("pt") String pt,
+                                            @Field("no_bukti") String noBukti,
+                                            @Field("no_kendaraan") String noKendaraan,
+                                            @Field("kode_jenis") String kodeJenis,
+                                            @Field("jumlah") String jumlah,
+                                            @Field("kode_satuan") String kodeSatuan,
+                                            @Field("harga") String harga,
+                                            @Field("userid") String userid,
+                                            @Field("edit") String edit,
+                                            @Field("km_awal") String km_awal,
+                                            @Field("km_akhir") String km_akhir,
+                                            @Field("tanggal") String tanggal,
+                                            @Field("keterangan") String keterangan);
+    }

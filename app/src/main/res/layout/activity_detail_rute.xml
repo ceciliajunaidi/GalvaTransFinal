@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutOnprogress"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarActivityDetailRute"
-        android:layout_width="0dp"
+        android:id="@+id/toolbarDetailRute"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
@@ -15,7 +20,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtTitleToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -25,253 +29,289 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/layoutButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarActivityDetailRute">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailRute">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/layoutButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="wrap_content"
-                    android:text="Nomor Order" />
+                    android:layout_margin="8dp">
 
-                <TextView
-                    android:id="@+id/txtNomorOrder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nomor Order"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Tujuan" />
+                    <TextView
+                        android:id="@+id/txtNomorOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtTujuan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Waktu Berangkat" />
+                    android:layout_margin="8dp">
 
-                <TextView
-                    android:id="@+id/txtWaktuBerangkat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tujuan"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Waktu Sampai" />
+                    <TextView
+                        android:id="@+id/txtTujuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtWaktuSampai"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Note Admin" />
+                    android:layout_margin="8dp">
 
-                <TextView
-                    android:id="@+id/txtNoteAdmin"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Waktu Berangkat"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtWaktuBerangkat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Waktu Sampai"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtWaktuSampai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Catatan Dari Admin"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtNoteAdmin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-    </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.card.MaterialCardView
-        android:id="@+id/layoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <LinearLayout
+        <android.support.design.card.MaterialCardView
+            android:id="@+id/layoutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="4dp">
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:orientation="horizontal">
 
-                    <android.support.design.button.MaterialButton
-                        android:id="@+id/btnAddBiayaTambahan"
-                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                    <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:backgroundTint="#FFCF5C"
-                        android:gravity="center"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:text="Biaya"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/txtBadgeBiaya"
-                        android:layout_width="wrap_content"
+                        <android.support.design.button.MaterialButton
+                            android:id="@+id/btnAddBiayaTambahan"
+                            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:backgroundTint="#FFCF5C"
+                            android:gravity="center"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="BIAYA"
+                            android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtBadgeBiaya"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/badge_item_count"
+                            android:textColor="#FFF"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="#FFF"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="1">
 
-                </android.support.constraint.ConstraintLayout>
+                        <android.support.design.button.MaterialButton
+                            android:id="@+id/btnUploadImage"
+                            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:backgroundTint="#FFCF5C"
+                            android:gravity="center"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="GAMBAR"
+                            android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <android.support.constraint.ConstraintLayout
+                        <TextView
+                            android:id="@+id/txtBadgeImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/badge_item_count"
+                            android:textColor="#FFF"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:orientation="horizontal">
 
                     <android.support.design.button.MaterialButton
-                        android:id="@+id/btnUploadImage"
-                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                        android:id="@+id/btnBatal"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:backgroundTint="#FFCF5C"
-                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#FF6666"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
-                        android:text="Gambar"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton.Icon"
+                        android:text="BATALKAN"
+                        android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:cornerRadius="8dp" />
 
-                    <TextView
-                        android:id="@+id/txtBadgeImage"
-                        android:layout_width="wrap_content"
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btnSubmit"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textColor="#FFF"
-                        android:textSize="10sp"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#69D0FF"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="SELESAIKAN"
+                        android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:cornerRadius="8dp" />
 
-                </android.support.constraint.ConstraintLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        </android.support.design.card.MaterialCardView>
 
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/btnBatalkan"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#F04545"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="BATALKAN"
-                    android:textAllCaps="true"
-                    android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="8dp" />
-
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/btnProses"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#69D0FF"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="PROSES"
-                    android:textAllCaps="true"
-                    android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="8dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.design.card.MaterialCardView>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

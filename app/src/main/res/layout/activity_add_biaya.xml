@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutAddBiaya"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutAddBiaya"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -14,10 +14,17 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:title="Tambah Biaya">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Tambah Biaya"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -34,9 +41,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <LinearLayout
+                android:id="@+id/containerJenisBiaya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -46,10 +55,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -58,6 +64,7 @@
                         android:layout_height="match_parent"
                         android:clickable="false"
                         android:drawableEnd="@drawable/ic_arrow_down"
+                        android:drawableRight="@drawable/ic_arrow_down"
                         android:focusable="false"
                         android:gravity="center_vertical"
                         android:hint="Jenis Biaya"
@@ -70,19 +77,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/containerJumlahSatuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layoutJumlah"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -102,10 +108,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -113,6 +116,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:drawableEnd="@drawable/ic_arrow_down"
+                        android:drawableRight="@drawable/ic_arrow_down"
                         android:focusable="false"
                         android:gravity="center_vertical"
                         android:hint="Satuan"
@@ -125,7 +129,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutKilometer"
+                android:id="@+id/containerKilometer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -136,10 +140,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -159,10 +160,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -180,6 +178,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/containerBiaya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -189,10 +188,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
@@ -210,6 +206,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/containerKeterangan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -219,10 +216,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText

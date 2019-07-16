@@ -26,7 +26,7 @@ public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPres
         ApiInterface apiInterface;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Rute>> getDataRute = apiInterface.getRuteByKodeDriver("GGMCCMGIN",
-                "select * from rute where email='" + username + "'");
+                "select * from rute where email='" + username + "' and id_status!=7 and selesai is NULL");
         getDataRute.enqueue(new Callback<List<Rute>>() {
             @SuppressWarnings("NullableProblems")
             @Override

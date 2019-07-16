@@ -26,7 +26,7 @@ public class ActivityListRutePresenterImpl implements ActivityListRutePresenter.
         ApiInterface apiInterface;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<RuteDetail>> getDataRuteDetail = apiInterface.getRuteDetailByIdRute("GGMCCMGIN",
-                "select * from rute_det where id_rute='" + nomorOrder + "'");
+                "select * from rute_det where id_rute='" + nomorOrder + "' and flag!=1");
         getDataRuteDetail.enqueue(new Callback<List<RuteDetail>>() {
             @SuppressWarnings("NullableProblems")
             @Override

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Tambahkan Catatan"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutMemo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="8dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editMemo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:hint="Memo"
+            android:longClickable="false"
+            android:singleLine="true"
+            android:textSize="14sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutKeterangan"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/editKeterangan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:hint="Keterangan"
+            android:maxLines="3"
+            android:minLines="3"
+            android:textSize="14sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btnCancelMemo"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FF6666"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Batal"
+            android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:textSize="14sp" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btnSubmitMemo"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#69D0FF"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Submit"
+            android:textAppearance="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
