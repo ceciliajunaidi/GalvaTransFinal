@@ -196,4 +196,5 @@ public class ActivityListRute extends AppCompatActivity implements ActivityListR
                     (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
     }
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
+import galvatrans.galindra.galva.cecilia.galvatrans.Model.SessionManager;
 import galvatrans.galindra.galva.cecilia.galvatrans.Retrofit.ApiClient;
 import galvatrans.galindra.galva.cecilia.galvatrans.Retrofit.ApiInterface;
 import retrofit2.Call;
@@ -19,6 +20,16 @@ public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPres
     ActivityMainPresenterImpl(ActivityMainPresenter.MainView mainView, Context context) {
         this.context = context;
         this.mainView = mainView;
+    }
+
+    @Override
+    public void onLogoutUserLogin() {
+        SessionManager sessionManager = new SessionManager(context);
+        sessionManager.logoutUser();
+
+        if (!sessionManager.isLoggedIn()) {
+            mainView.onLogoutUserLoginFinish();
+        }
     }
 
     @Override
@@ -40,6 +51,8 @@ public class ActivityMainPresenterImpl implements ActivityMainPresenter.MainPres
                 mainView.onGetDataRuteFailed();
             }
         });
+
+
 
     }
 }

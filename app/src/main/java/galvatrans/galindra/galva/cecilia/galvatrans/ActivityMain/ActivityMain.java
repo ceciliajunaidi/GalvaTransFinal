@@ -4,10 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import galvatrans.galindra.galva.cecilia.galvatrans.ActivityListRute.ActivityListRute;
+import galvatrans.galindra.galva.cecilia.galvatrans.ActivityLogin.ActivityLogin;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.Rute;
 import galvatrans.galindra.galva.cecilia.galvatrans.Model.SessionManager;
 import galvatrans.galindra.galva.cecilia.galvatrans.R;
@@ -29,6 +34,8 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
 
     ActivityMainPresenterImpl activityMainPresenterImpl;
     List<Rute> ruteList = new ArrayList<>();
+
+    Toolbar toolbarMainActivity;
 
     Dialog dialogLoading;
     Dialog dialogYesNo;
@@ -65,6 +72,9 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
 
     private void initLayout() {
         txtNoRute = findViewById(R.id.txtNoRute);
+
+        toolbarMainActivity = findViewById(R.id.toolbarMainActivity);
+        setSupportActionBar(toolbarMainActivity);
 
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
 
@@ -116,6 +126,14 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
             dialogLoading.getWindow().setLayout
                     (LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
+    }
+
+    @Override
+    public void onLogoutUserLoginFinish() {
+        Intent intentLoginActivity = new Intent(this, ActivityLogin.class);
+
+        startActivity(intentLoginActivity);
+        finish();
     }
 
     private void onGetDataRute() {
@@ -202,6 +220,32 @@ public class ActivityMain extends AppCompatActivity implements ActivityMainPrese
             dialogYesNo.getWindow().setLayout
                     (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout: {
+                AlertDialog.Builder logout = new AlertDialog.Builder(this);
+                logout.setMessage("Apakah anda yakin ingin keluar?").setCancelable(false)
+                        .setPositiveButton("Ya", (dialog, which) -> {
+                            activityMainPresenterImpl.onLogoutUserLogin();
+                        })
+                        .setNegativeButton("Tidak", (dialog, which) -> dialog.cancel());
+                AlertDialog alert = logout.create();
+                alert.setTitle("LOG OUT");
+                alert.show();
+
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
